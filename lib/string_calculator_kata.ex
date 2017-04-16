@@ -25,7 +25,7 @@ defmodule StringCalculatorKata do
     if negatives == [] do
       list
     else
-      raise "negatives not allowed: #{negatives |> Enum.join(", ")}"
+      raise "negatives not allowed: " <> Enum.join(negatives, ", ")
     end
   end
 
