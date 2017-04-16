@@ -14,7 +14,19 @@ defmodule StringCalculatorKata do
   end
 
   defp add(string, delimiters) do
-    string |> String.split(delimiters) |> sum_all_values
+    string 
+      |> String.split(delimiters) 
+      |> check_negatives 
+      |> sum_all_values
+  end
+
+  defp check_negatives(list) do
+    negatives = Enum.filter(list, fn(x) -> String.to_integer(x) < 0 end)
+    if negatives == [] do
+      list
+    else
+      raise "negatives not allowed: #{negatives |> Enum.join(", ")}"
+    end
   end
 
   defp sum_all_values(list) do
