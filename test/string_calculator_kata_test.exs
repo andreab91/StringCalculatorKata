@@ -12,4 +12,8 @@ defmodule StringCalculatorKataTest do
   test "given two numbers comma separated returns the sum" do
     assert StringCalculatorKata.add("1,2") == 3
   end
+
+  test "new line as delimiter" do
+  	assert StringCalculatorKata.add("1\n2,3") == 6
+  end
 end
