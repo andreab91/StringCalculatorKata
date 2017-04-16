@@ -1,6 +1,6 @@
-# StringCalculatorKata
+# String Calculator Kata
 
-String calculator Kata with **Elixir** language
+String Calculator Kata (http://osherove.com/tdd-kata-1/) solved with **Elixir** language
 
 ### Run tests
 ```
