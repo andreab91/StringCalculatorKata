@@ -4,6 +4,9 @@ defmodule StringCalculatorKata do
   end
 
   def add(string) do
-    String.to_integer(string)
+    String.split(string, ",") 
+      |> Enum.reduce(0, fn(x, sum) 
+        -> String.to_integer(x) + sum 
+      end)
   end
 end
