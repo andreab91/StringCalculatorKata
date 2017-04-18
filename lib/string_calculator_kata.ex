@@ -16,22 +16,32 @@ defmodule StringCalculatorKata do
   defp add(string, delimiters) do
     string 
       |> String.split(delimiters) 
+      |> covert_to_integer
       |> check_negatives 
-      |> sum_all_values
+      |> ignore_big
+      |> sum_values
+  end
+
+  defp covert_to_integer(list) do
+    list |> Enum.map(&String.to_integer(&1))
   end
 
   defp check_negatives(list) do
-    negatives = Enum.filter(list, fn(x) -> String.to_integer(x) < 0 end)
+    negatives = list |> Enum.filter(&(&1) < 0)
     if negatives == [] do
       list
     else
-      raise "negatives not allowed: " <> Enum.join(negatives, ", ")
+      raise "Negatives not allowed: " <> Enum.join(negatives, ", ")
     end
   end
 
-  defp sum_all_values(list) do
+  defp ignore_big(list) do
+    list |> Enum.filter(&(&1) <= 1000)
+  end
+
+  defp sum_values(list) do
     Enum.reduce(list, 0, fn(x, sum) ->
-      sum + String.to_integer(x)
+      sum + x
     end)
   end
 end

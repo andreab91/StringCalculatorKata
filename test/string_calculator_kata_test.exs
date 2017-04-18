@@ -22,12 +22,16 @@ defmodule StringCalculatorKataTest do
   end
 
   test "custom delimiter with variable length" do
-  	assert StringCalculatorKata.add("//___\n1___2___3") == 6
+  	assert StringCalculatorKata.add("//***\n1***2***3") == 6
   end
 
   test "raise an exception when negative numbers" do
-  	assert_raise RuntimeError, "negatives not allowed: -2, -3", fn ->
+  	assert_raise RuntimeError, "Negatives not allowed: -2, -3", fn ->
       StringCalculatorKata.add("1,-2,-3")
-	end
+    end
+  end
+
+  test "ignore numbers bigger than 1000" do
+    assert StringCalculatorKata.add("1,2,1001") == 3
   end
 end
