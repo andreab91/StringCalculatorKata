@@ -17,12 +17,8 @@ defmodule StringCalculatorKataTest do
   	assert StringCalculatorKata.add("1\n2,3") == 6
   end
 
-  test "custom delimiter" do
+  test "single custom delimiter" do
   	assert StringCalculatorKata.add("//;\n1;2;3") == 6
-  end
-
-  test "custom delimiter with variable length" do
-  	assert StringCalculatorKata.add("//***\n1***2***3") == 6
   end
 
   test "raise an exception when negative numbers" do
@@ -33,5 +29,17 @@ defmodule StringCalculatorKataTest do
 
   test "ignore numbers bigger than 1000" do
     assert StringCalculatorKata.add("1,2,1001") == 3
+  end
+
+  test "single custom delimiter with variable lengths" do
+    assert StringCalculatorKata.add("//[***]\n1***2***3") == 6
+  end
+
+  test "multiple custom delimiters" do
+    assert StringCalculatorKata.add("//[*][%]\n1*2%3") == 6
+  end
+
+  test "multiple custom delimiters with variable lengths" do
+    assert StringCalculatorKata.add("//[*][%%][___]\n1*2%%3___4") == 10
   end
 end

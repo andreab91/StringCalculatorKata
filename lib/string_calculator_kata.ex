@@ -3,6 +3,12 @@ defmodule StringCalculatorKata do
     0
   end
 
+  def add("//[" <> string_without_header) do
+    [custom_delimiter_group, string] = String.split(string_without_header, "]\n")
+    custom_delimiters = String.split(custom_delimiter_group, "][")
+    string |> add(custom_delimiters)    
+  end
+
   def add("//" <> string_without_header) do
     [custom_delimiter, string] = String.split(string_without_header, "\n")
     string |> add(custom_delimiter)
@@ -15,14 +21,14 @@ defmodule StringCalculatorKata do
 
   defp add(string, delimiters) do
     string 
-      |> String.split(delimiters) 
-      |> covert_to_integer
+      |> String.split(delimiters)
+      |> convert_to_integer
       |> check_negatives 
       |> ignore_big
       |> sum_values
   end
 
-  defp covert_to_integer(list) do
+  defp convert_to_integer(list) do
     list |> Enum.map(&String.to_integer(&1))
   end
 
