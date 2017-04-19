@@ -3,15 +3,11 @@ defmodule StringCalculatorKata do
     0
   end
 
-  def add("//[" <> string_without_header) do
-    [custom_delimiter_group, string] = String.split(string_without_header, "]\n")
-    custom_delimiters = String.split(custom_delimiter_group, "][")
-    string |> add(custom_delimiters)    
-  end
-
   def add("//" <> string_without_header) do
-    [custom_delimiter, string] = String.split(string_without_header, "\n")
-    string |> add(custom_delimiter)
+    [delimiter_group, string] = String.split(string_without_header, "\n")
+    custom_delimiters = get_delimiters_from(delimiter_group)
+
+    string |> add(custom_delimiters)
   end
 
   def add(string) do
@@ -49,5 +45,14 @@ defmodule StringCalculatorKata do
     Enum.reduce(list, 0, fn(x, sum) ->
       sum + x
     end)
+  end
+
+  defp get_delimiters_from(group) do
+    if group |> String.contains?("[") do
+      Regex.scan(~r/\[(.*?)\]/, group, capture: :all_but_first) 
+      |> List.flatten()
+    else
+      group
+    end
   end
 end
